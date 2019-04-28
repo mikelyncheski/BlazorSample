@@ -1,0 +1,13 @@
+﻿<li class="nav-item px-3">
+	<NavLink class="nav-link" href="@Href" Match="@Match">
+		<span class="oi oi-@Icon" aria-hidden="true"></span> @Title
+	</NavLink>
+</li>
+
+@functions {
+	[Parameter] string Title { get; set; } = "?";
+	[Parameter] string Href { get; set; } = string.Empty;
+	[Parameter] string Icon { get; set; } = "question-mark";
+	[Parameter] NavLinkMatch Match { get; set; } = NavLinkMatch.Prefix;
+}
+
