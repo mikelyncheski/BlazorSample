@@ -1,0 +1,19 @@
+﻿
+<tr class="todo @rowClass">
+	<td class="text-center"><input type="checkbox" bind="@IsCompleted" /></td>
+	<td class="@titleClass">@Title</td>
+</tr>
+
+
+
+@functions 
+{
+	[Parameter]
+	string Title { get; set; } = string.Empty;
+
+	[Parameter]
+	bool IsCompleted { get; set; } = false;
+
+	string titleClass => IsCompleted ? "completed text-muted" : null;
+	string rowClass => IsCompleted ? "table-secondary" : null;
+}

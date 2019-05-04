@@ -1,0 +1,29 @@
+﻿@page "/todopage"
+@using BlazorSample.Shared
+
+<h1>To Do List</h1>
+<p>This sample is based on the <a href="https://www.youtube.com/watch?v=bbHzyIsqGuU">Microsoft Blazor - Getting Started</a> video from DevExpress.</p>
+
+<ToDoList ToDos="@toDos"></ToDoList>
+
+<div>@toDos[0].IsCompleted</div>
+<button class="btn btn-primary" onclick="@ShowMe">Show Me</button>
+
+
+@functions {
+	IList<ToDo> toDos = new List<ToDo>
+	{
+		new ToDo { Title = "Cancel NYC Bike Ride", IsCompleted = true },
+		new ToDo { Title = "Pick up Kristyn at 1:00" },
+		new ToDo { Title = "Eat Lunch with Kristyn" },
+		new ToDo { Title = "Watch a movie with Kristyn" }
+	};
+
+
+	private void ShowMe()
+	{
+		toDos[0].Title += " X";
+		//System.Console.WriteLine($"HERE YOU GO {toDos[0].IsCompleted}");
+		//StateHasChanged();       
+	}
+}

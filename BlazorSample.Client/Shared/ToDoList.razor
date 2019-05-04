@@ -1,0 +1,28 @@
+﻿<Table class="table table-bordered">
+	<thead>
+		<tr>
+			<th class="text-centered" style="width:10%">Done</th>
+			<th>To Do</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var toDo in ToDos)
+		{
+			<ToDoItem Title="@toDo.Title" IsCompleted="@toDo.IsCompleted"  />
+		}
+	</tbody>
+</Table>
+
+<NewItemEntry OnNewItem="@OnNewItem" />
+
+@functions
+{
+	[Parameter]
+	IList<ToDo> ToDos { get; set; }
+
+	private void OnNewItem(string newItemTitle)
+	{
+		ToDos.Add(new ToDo { Title = newItemTitle });
+		StateHasChanged();
+	}
+}

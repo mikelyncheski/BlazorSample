@@ -1,0 +1,41 @@
+﻿<div class="input-group input-group-lg">
+	<div class="input-group-prepend">
+		<span class="input-group-text">
+			New To Do Item
+		</span>
+	</div>
+	<input type="text" class="form-control" placeholder="Enter To Do Here" bind-value-oninput="@Title" onkeyup="@KeyPress"/>
+
+	<div class="input-group-prepend">
+		<button class="btn btn-secondary @ButtonDisabled" onclick="@OnAddClick">Add (Enter)</button>
+	</div>
+</div>
+
+@functions 
+{
+	[Parameter]
+	private Action<string> OnNewItem { get; set; }
+
+	private string Title { get; set; }
+	private string ButtonDisabled => string.IsNullOrWhiteSpace(Title) ? "disabled" : null;
+
+	private void OnAddClick()
+	{
+		System.Console.WriteLine("OnAddClick");
+		if (OnNewItem != null)
+		{
+			OnNewItem(Title);
+			Title = string.Empty;
+		}
+	}
+
+
+	private void KeyPress(UIKeyboardEventArgs e)
+	{
+		System.Console.WriteLine("KeyPress");
+		if (e.Key == "Enter" && ButtonDisabled == null)
+		{
+			OnAddClick();
+		}
+	}
+}
