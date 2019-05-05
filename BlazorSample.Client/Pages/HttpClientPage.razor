@@ -1,0 +1,54 @@
+﻿@page "/httpclient"
+@inject HttpClient HttpClient
+@using BlazorSample.Shared
+
+
+<h1>Strava Activities</h1>
+<p>This sample is based loosely on the <a href="https://www.youtube.com/watch?v=H8vEcNd4vvw&feature=youtu.be">Microsoft Blazor - Dependency and Data Access</a> video from DevExpress.</p>
+
+
+@if (Activities != null)
+{
+<table class="table m-4 activity-table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Distance</th>
+			<th>Elevation</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var activity in Activities)
+		{
+		<tr>
+			<td>@activity.Name</td>
+			<td>@activity.StartDate</td>
+			<td>@activity.Distance</td>
+			<td>@activity.Elevation</td>
+		</tr>
+		}
+	</tbody>
+</table>
+}
+
+
+@if (Dump != null)
+{
+	<pre>@Dump</pre>
+}
+
+
+@functions {
+	ActivityFormattedDto[] Activities { get; set; }
+	string Dump { get; set; } = "something";
+
+
+	protected override async Task OnInitAsync()
+	{
+		// Technically, all requests are made through the browser's Fetch API.
+		Activities = await HttpClient.GetJsonAsync<ActivityFormattedDto[]>("api/SampleData/Activities");
+		//Dump = await HttpClient.GetStringAsync("api/SampleData/Activities");
+	}
+
+}
