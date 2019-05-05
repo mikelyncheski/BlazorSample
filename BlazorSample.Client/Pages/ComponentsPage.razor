@@ -1,0 +1,47 @@
+﻿@page "/components"
+@using BlazorSample.Shared
+
+<Alert Type="Alert.AlertType.Warning" Title="This is a title.">
+	Something cool just happened.
+</Alert>
+
+<Card Title="Cards are fun and easy">
+	<Content>
+		They contain content, which is usually text.  Other types of elements are supported too.
+	</Content>
+</Card>
+
+<div>&nbsp;</div>
+
+<Card Title="Cards are fun and easy">
+	<Content>
+		They contain content, which is usually text.  Other types of elements are supported too.
+	</Content>
+	<TitleTemplate Context="title">
+		@*Get the template parameter from title instead of default name of Content.*@
+		<h1 class="card-title text-danger">@title</h1>
+	</TitleTemplate>
+</Card>
+
+<div>&nbsp;</div>
+
+<Card Title="Cards are fun and easy">
+	<Header>
+		<h3>This is a header.</h3>
+	</Header>
+	<Content>
+		They contain content, which is usually text.  Other types of elements are supported too.
+	</Content>
+	<TitleTemplate Context="title">
+		@*Get the template parameter from title instead of default name of Content.*@
+		<h1 class="card-title text-danger">@title</h1>
+	</TitleTemplate>
+	<Footer>
+		This is a footer.
+	</Footer>
+</Card>
+
+
+@functions {
+
+}
