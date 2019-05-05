@@ -1,7 +1,7 @@
 ﻿@page "/httpclient"
 @inject HttpClient HttpClient
 @using BlazorSample.Shared
-
+@inject IDataLayer DataLayer
 
 <h1>Strava Activities</h1>
 <p>This sample is based loosely on the <a href="https://www.youtube.com/watch?v=H8vEcNd4vvw&feature=youtu.be">Microsoft Blazor - Dependency and Data Access</a> video from DevExpress.</p>
@@ -47,8 +47,11 @@
 	protected override async Task OnInitAsync()
 	{
 		// Technically, all requests are made through the browser's Fetch API.
-		Activities = await HttpClient.GetJsonAsync<ActivityFormattedDto[]>("api/SampleData/Activities");
+		//Activities = await HttpClient.GetJsonAsync<ActivityFormattedDto[]>("api/SampleData/Activities");
 		//Dump = await HttpClient.GetStringAsync("api/SampleData/Activities");
+
+		Activities = await DataLayer.FetchActivities();
+
 	}
 
 }
